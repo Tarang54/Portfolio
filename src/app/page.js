@@ -1,7 +1,10 @@
+"use client"
 import Image from "next/image";
 import { Poppins } from "next/font/google";
 import MainImg from "./../assets/main_img.png";
 import Link from "next/link";
+import Lottie from "lottie-react";
+import Lotti from "./../../public/lottie.json";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -38,10 +41,12 @@ export default function Home() {
         <div className={`text-[#272727] text-[24px] font-[500] ${poppins.className}`}>Designer & Developer</div>
       </div>
 
-      <div className="bg-[#272727] absolute left-0 top-3/5 rounded-r-[100px] w-[220px] h-[60px]">
-        <div className={`relative flex items-center text-[18px] text-[#d8d8d8] w-[220px] h-[60px] pl-[10px] ${poppins.className}`}>
+      <div className="bg-[#272727] absolute left-0 top-3/5 rounded-r-[100px] w-[210px] h-[60px]">
+        <div className={`relative flex items-center text-[18px] text-[#d8d8d8] w-[210px] h-[60px] pl-[10px] ${poppins.className}`}>
           <div>Based in India</div>
-          <div className="bg-[#d8d8d8] w-[50px] h-[50px] rounded-[100px] absolute right-[5px]"></div>
+          <div className="bg-[#d8d8d8] flex justify-center items-center w-[50px] h-[50px] rounded-[100px] absolute right-[5px]">
+            <Lottie animationData={Lotti} loop={true} style={{ width: "90px", height: "90px" }} className="absolute"/>
+          </div>
         </div>
       </div>
 
