@@ -2,11 +2,15 @@
 
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import Lottie from "lottie-react";
+// import Lottie from "lottie-react";
 import Link from "next/link";
 import { Poppins } from "next/font/google";
 import MainImg from "./../assets/main_img.png";
 import Lotti from "./../../public/lottie.json";
+
+import dynamic from "next/dynamic";
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
+
 
 const poppins = Poppins({
   subsets: ["latin"],
