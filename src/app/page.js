@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import dynamic from "next/dynamic";
 // import Lottie from "lottie-react";
 import Link from "next/link";
 import { Poppins } from "next/font/google";
