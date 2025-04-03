@@ -1,9 +1,11 @@
-"use client"
+"use client";
+
 import Image from "next/image";
+import dynamic from "next/dynamic";
+import Lottie from "lottie-react";
+import Link from "next/link";
 import { Poppins } from "next/font/google";
 import MainImg from "./../assets/main_img.png";
-import Link from "next/link";
-import Lottie from "lottie-react";
 import Lotti from "./../../public/lottie.json";
 
 const poppins = Poppins({
