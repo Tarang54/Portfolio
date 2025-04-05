@@ -83,7 +83,7 @@ export default function CustomCursor() {
     >
       <div
         ref={cursorInnerRef}
-        className="w-6 h-6 border border-white rounded-full relative transition-transform duration-150 ease-out transition-opacity duration-100"
+        className="w-6 h-6 border border-white rounded-full relative transition-transform duration-150 ease-out "
       />
     </div>
   );
