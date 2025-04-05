@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import 'animate.css';
+
 
 const OpeningScreen = ({ onComplete }) => {
   const [textIndex, setTextIndex] = useState(-1);
@@ -10,7 +12,36 @@ const OpeningScreen = ({ onComplete }) => {
   const [exitTarang, setExitTarang] = useState(false);
 
   const words = ["Hello", "Namaste", "Hola", "Bonjour", "Ciao"];
-  const tarangText = "I'm Tarang".split("");
+  const tarangText = "I'm Tarang".split(" ");
+
+  const [visible, setVisible] = useState(false);
+  const [animateExit, setAnimateExit] = useState(false);
+  
+  useEffect(() => {
+    setVisible(true);
+  }, []);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 },
+    },
+  };
+
+  const letterVariants = {
+    hidden: { y: "1em", opacity: 0 },
+    visible: {
+      y: "0em",
+      opacity: 1,
+      transition: { ease: "easeOut", duration: 0.6 },
+    },
+    exit: {
+      y: "-1em",
+      opacity: 0,
+      transition: { ease: "easeIn", duration: 0.3 },
+    },
+  };
 
   useEffect(() => {
     const startTextAnimation = setTimeout(() => {
@@ -39,21 +70,30 @@ const OpeningScreen = ({ onComplete }) => {
     }
   }, [showTarang]);
 
+//   useEffect(() => {
+//     if (exitTarang) {
+//       setTimeout(() => onComplete(), 800); // Trigger onComplete after "I'm Tarang" exits
+//     }
+//   }, [exitTarang]);
+
   useEffect(() => {
     if (exitTarang) {
-      setTimeout(() => onComplete(), 800); // Trigger onComplete after "I'm Tarang" exits
+      setAnimateExit(true); // Start animation
+      setTimeout(() => onComplete(), 800); // Delay matches animation duration
     }
-  }, [exitTarang]);
+  }, [exitTarang, onComplete]);
 
   return (
-    <motion.div className="fixed inset-0 bg-[#d8d8d8] z-[1000] flex justify-center items-center">
+    <motion.div className={`fixed inset-0 bg-[#d8d8d8] z-[1000] flex justify-center items-center ${
+        animateExit ? 'animate__animated animate__fadeOutLeft' : ''
+      }`}>
       {/* Horizontal Split Animation */}
       <motion.div
         initial={{ height: "0vh" }}
         animate={{ height: expandScreen ? "100vh" : "32vh" }}
         transition={{
           duration: expandScreen ? 1 : 2.4,
-          ease: [0.3, 0, 0.4, 1],
+          ease: [0.3, 0, 0.6, 1],
         }}
         className="absolute top-1/2 left-0 w-full bg-[#272727] -translate-y-1/2"
       />
@@ -93,17 +133,25 @@ const OpeningScreen = ({ onComplete }) => {
             ease: "easeInOut",
           }}
         >
-          {tarangText.map((char, index) => (
-            <motion.span
-              key={index}
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="inline-block"
-            >
-              {char}
-            </motion.span>
-          ))}
+          {/* {tarangText.map((char, index) => ( */}
+          <motion.div
+            initial="hidden"
+            animate={visible ? "visible" : "hidden"}
+            exit="exit"
+            variants={containerVariants}
+            className="relative overflow-hidden text-4xl font-bold text-white leading-[1em] h-[1em]"
+          >
+            {tarangText.map((char, index) => (
+              <motion.span
+                key={index}
+                variants={letterVariants}
+                className="inline-block"
+              >
+                {char}
+              </motion.span>
+            ))}
+          </motion.div>
+          {/* ))} */}
         </motion.div>
       )}
     </motion.div>

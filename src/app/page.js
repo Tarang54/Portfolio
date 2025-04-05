@@ -1,5 +1,6 @@
 "use client";
 
+import "./globals.css";
 import Image from "next/image";
 // import Lottie from "lottie-react";
 import Link from "next/link";
@@ -7,6 +8,7 @@ import { Poppins } from "next/font/google";
 import MainImg from "./../assets/main_img.png";
 import Lotti from "./../../public/lottie.json";
 
+import "animate.css";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import OpeningScreen from "@/components/openingScreen";
@@ -25,9 +27,15 @@ export default function Home() {
       {!animationComplete && (
         <OpeningScreen onComplete={() => setAnimationComplete(true)} />
       )}
-      {animationComplete && (
-        <div className="min-h-screen bg-[#d8d8d8] flex-col justify-center w-screen overflow-hidden relative">
-          <div className="flex m-[20px] mx-[30px] items-center justify-between w-auto">
+      {/* animate__animated animate__fadeInLeft customFadeInLeftMain */}
+      {/* {animationComplete && ( */}
+      <div className="min-h-screen bg-[#d8d8d8] flex-col justify-center w-screen overflow-hidden relative ">
+        {animationComplete ? (
+          <div
+            className={`flex m-[20px] mx-[30px] items-center justify-between w-auto ${
+              animationComplete ? "custom-fade-in-left" : ""
+            }`}
+          >
             <div
               className={`text-black font-semibold text-[26px] ${poppins.className}`}
             >
@@ -39,8 +47,16 @@ export default function Home() {
               <Link href="/contact">Contact</Link>
             </div>
           </div>
+        ) : (
+          ""
+        )}
 
-          <div className="flex flex-col absolute top-1/3 right-[15%]">
+        {animationComplete ? (
+          <div
+            className={`flex flex-col absolute top-1/3 right-[15%] ${
+              animationComplete ? "custom-fade-in-left" : ""
+            }`}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -83,38 +99,50 @@ export default function Home() {
               Designer & Developer
             </div>
           </div>
+        ) : (
+          ""
+        )}
 
-          <div className="bg-[#272727] absolute left-0 top-3/5 rounded-r-[100px] w-[210px] h-[60px]">
-            <div
-              className={`relative flex items-center text-[18px] text-[#d8d8d8] w-[210px] h-[60px] pl-[10px] ${poppins.className}`}
-            >
-              <div>Based in India</div>
-              <div className="bg-[#d8d8d8] flex justify-center items-center w-[50px] h-[50px] rounded-[100px] absolute right-[5px]">
-                <Lottie
-                  animationData={Lotti}
-                  loop={true}
-                  style={{ width: "90px", height: "90px" }}
-                  className="absolute"
-                />
-              </div>
+        <div className="bg-[#272727] absolute left-0 top-3/5 rounded-r-[100px] w-[190px] h-[60px]">
+          <div
+            className={`relative flex items-center text-[14px] text-[#d8d8d8] w-[190px] h-[60px] pl-[10px] ${poppins.className}`}
+          >
+            <div>Based in India</div>
+            <div className="bg-[#d8d8d8] flex justify-center items-center w-[50px] h-[50px] rounded-[100px] absolute right-[5px]">
+              <Lottie
+                animationData={Lotti}
+                loop={true}
+                style={{ width: "90px", height: "90px" }}
+                className="absolute"
+              />
             </div>
           </div>
+        </div>
 
-          <Image
-            src={MainImg}
-            alt="Tarang"
-            className="absolute bottom-0 object-contain h-[90vh] w-full m-auto z-999 pr-[55px]"
-            priority
-          />
+        <Image
+          src={MainImg}
+          alt="Tarang"
+          className="absolute bottom-0 object-contain h-[90vh] w-full m-auto z-999 pr-[55px]"
+          priority
+        />
 
-          {/* <div className="text-[140px] font-medium absolute bottom-[10px] leading-[140px] left-[20px] m-auto text-[#272727]">TARANG </div> */}
-          {/* <div className="text-[140px] font-medium absolute bottom-[10px] leading-[140px] right-[20px] m-auto text-[#272727]">SULTANIA </div> */}
-          <div className="text-[140px] w-screen px-[20px] flex justify-between font-medium absolute bottom-[10px] gap-[5px] leading-[140px]  m-auto text-[#272727]">
+        {/* <div className="text-[140px] font-medium absolute bottom-[10px] leading-[140px] left-[20px] m-auto text-[#272727]">TARANG </div> */}
+        {/* <div className="text-[140px] font-medium absolute bottom-[10px] leading-[140px] right-[20px] m-auto text-[#272727]">SULTANIA </div> */}
+        {/* <div className="text-[140px] w-screen px-[20px] flex justify-between font-medium absolute bottom-[10px] gap-[5px] leading-[140px]  m-auto text-[#272727] animate__animated animate__fadeInLeft customFadeInLeftMain"> */}
+        {animationComplete ? (
+          <div
+            className={`text-[140px] w-screen px-[20px] flex justify-between font-medium absolute bottom-[10px] gap-[5px] leading-[140px] m-auto text-[#272727] ${
+              animationComplete ? "custom-fade-in-left" : ""
+            }`}
+          >
             <span>TARANG</span>
             <span>SULTANIA</span>
           </div>
-        </div>
-      )}
+        ) : (
+          ""
+        )}
+      </div>
+      {/* )} */}
     </main>
   );
 }
