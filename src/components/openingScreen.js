@@ -106,7 +106,7 @@ const OpeningScreen = ({ onComplete }) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4 }}
-          style={{ fontFamily: "'Winky Sans', serif" }}
+          style={{ fontFamily: "Winky Sans, serif" }}
           className="absolute text-[48px] font-bold text-white"
         >
           {words[textIndex]}
